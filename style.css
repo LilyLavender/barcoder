@@ -75,13 +75,25 @@ video {
 
 .history-item {
   display: flex;
-  justify-content: space-between;
   margin-top: 0.5rem;
+}
+
+.history-item span {
   cursor: pointer;
   background-color: #00000020;
   width: fit-content;
   padding: 0.2em 0.3em;
   border-radius: 4px;
+}
+
+.delete-btn {
+  background: none;
+  cursor: pointer;
+  color: black;
+  padding: 0;
+  margin-top: 0;
+  margin-left: 0.5em;
+  font-size: 1.2em;
 }
 
 h3 {

@@ -94,11 +94,28 @@ function loadHistory() {
   history.forEach(upc => {
     const div = document.createElement("div");
     div.className = "history-item";
-    div.innerHTML = `
-      <span onclick="generate('${upc}')">${upc}</span>
-    `;
+
+    const span = document.createElement("span");
+    span.textContent = upc;
+    span.style.cursor = "pointer";
+    span.onclick = () => generate(upc);
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = '<i class="bi bi-trash"></i>';
+    deleteBtn.className = "delete-btn";
+    deleteBtn.onclick = () => removeFromHistory(upc);
+
+    div.appendChild(span);
+    div.appendChild(deleteBtn);
     historyEl.appendChild(div);
   });
+}
+
+function removeFromHistory(upc) {
+  let history = JSON.parse(localStorage.getItem("history") || "[]");
+  history = history.filter(h => h !== upc);
+  localStorage.setItem("history", JSON.stringify(history));
+  loadHistory();
 }
 
 loadHistory();
