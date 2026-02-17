@@ -69,10 +69,6 @@ video {
   display: none;
 }
 
-#history {
-  font-size: 1.1em;
-}
-
 .history-item {
   display: flex;
   margin-top: 0.5rem;
@@ -84,6 +80,9 @@ video {
   width: fit-content;
   padding: 0.2em 0.3em;
   border-radius: 4px;
+  font-weight: bold;
+  font-family: 'Courier New', sans-serif;
+  font-size: 1.2em;
 }
 
 .delete-btn {
