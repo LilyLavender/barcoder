@@ -1,0 +1,89 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  padding: 1rem;
+  background: #f7f7f7;
+}
+
+h1 {
+  font-size: 1.8em;
+  margin-bottom: 0.2em;
+}
+
+input,
+button {
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+input {
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: stretch;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+button {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75em;
+  cursor: pointer;
+}
+
+button.longbtn {
+  width: 100%;
+}
+
+.card {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+video {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.camera-btn {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
+
+#barcode {
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+#history {
+  font-size: 1.1em;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  background-color: #00000020;
+  width: fit-content;
+  padding: 0.2em 0.3em;
+  border-radius: 4px;
+}
+
+h3 {
+  margin-top: 0;
+}
