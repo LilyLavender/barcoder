@@ -22,6 +22,8 @@ function generate(upc) {
   addToHistory(upc11);
 }
 
+let activeStream = null;
+
 async function startCamera() {
   const codeReader = new ZXing.BrowserBarcodeReader();
   const video = document.getElementById("video");
@@ -31,18 +33,32 @@ async function startCamera() {
   try {
     const result = await codeReader.decodeOnceFromVideoDevice(null, video);
 
+    activeStream = video.srcObject;
+
     const upc11 = normalizeUPC(result.text);
     if (!upc11) {
       alert("Scanned code is not a valid UPC");
+      stopCamera();
       return;
     }
 
     upcInput.value = upc11;
     generate(upc11);
     videoCard.hidden = true;
+    stopCamera();
   } catch (err) {
     console.error(err);
     alert("Camera scan failed");
+    stopCamera();
+  }
+}
+
+function stopCamera() {
+  if (activeStream) {
+    activeStream.getTracks().forEach(track => track.stop());
+    activeStream = null;
+    const video = document.getElementById("video");
+    video.srcObject = null;
   }
 }
 
