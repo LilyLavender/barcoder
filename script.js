@@ -25,7 +25,8 @@ function generate(upc) {
 async function startCamera() {
   const codeReader = new ZXing.BrowserBarcodeReader();
   const video = document.getElementById("video");
-  video.hidden = false;
+  const videoCard = document.getElementById("video-card");
+  videoCard.hidden = false;
 
   try {
     const result = await codeReader.decodeOnceFromVideoDevice(null, video);
@@ -38,7 +39,7 @@ async function startCamera() {
 
     upcInput.value = upc11;
     generate(upc11);
-    video.hidden = true;
+    videoCard.hidden = true;
   } catch (err) {
     console.error(err);
     alert("Camera scan failed");

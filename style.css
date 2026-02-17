@@ -47,7 +47,7 @@ button.longbtn {
 
 video {
   width: 100%;
-  margin-top: 1rem;
+  border-radius: 6px;
 }
 
 .header {

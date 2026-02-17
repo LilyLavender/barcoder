@@ -18,6 +18,10 @@
     <button onclick="generate()" class="longbtn">Generate Barcode</button>
   </div>
 
+  <div class="card" id="video-card" hidden>
+    <video id="video"></video>
+  </div>
+
   <div class="card barcode-card hidden" id="barcodeCard">
     <svg id="barcode"></svg>
   </div>
@@ -26,8 +30,6 @@
     <h3>History</h3>
     <div id="history"></div>
   </div>
-
-  <video id="video" hidden></video>
 
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
   <script src="https://unpkg.com/@zxing/library@latest"></script>
