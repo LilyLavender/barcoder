@@ -5,21 +5,27 @@ const historyEl = document.getElementById("history");
 
 let currentUPC = null;
 
-function generate(upc) {
-  const raw = upc || upcInput.value;
-  const upc11 = normalizeUPC(raw);
-  if (!upc11) return;
+function generate(value) {
+  const raw = value ?? upcInput.value;
+  const text = raw.trim();
 
-  currentUPC = upc11;
-  upcInput.value = upc11;
+  if (!text.length) return;
 
-  JsBarcode(barcodeEl, withChecksum(upc11), {
-    format: "upc",
-    displayValue: true,
-  });
+  currentUPC = text;
+  upcInput.value = text;
 
-  barcodeCard.classList.remove("hidden");
-  addToHistory(upc11);
+  try {
+    JsBarcode(barcodeEl, text, {
+      format: "CODE128",
+      displayValue: true,
+    });
+
+    barcodeCard.classList.remove("hidden");
+    addToHistory(text);
+  } catch (err) {
+    console.error(err);
+    alert("Invalid barcode value");
+  }
 }
 
 let activeStream = null;
@@ -33,17 +39,17 @@ async function startCamera() {
   try {
     const result = await codeReader.decodeOnceFromVideoDevice(null, video);
 
-    activeStream = video.srcObject;
+    const text = result.text.trim();
 
-    const upc11 = normalizeUPC(result.text);
-    if (!upc11) {
-      alert("Scanned code is not a valid UPC");
+    if (!text.length) {
+      alert("Scanned code is invalid");
       stopCamera();
       return;
     }
 
-    upcInput.value = upc11;
-    generate(upc11);
+    upcInput.value = text;
+    generate(text);
+    
     videoCard.hidden = true;
     stopCamera();
   } catch (err) {
@@ -60,36 +66,6 @@ function stopCamera() {
     const video = document.getElementById("video");
     video.srcObject = null;
   }
-}
-
-function normalizeUPC(value) {
-  const digits = value.replace(/\D/g, "");
-
-  if (digits.length > 12) return null;
-
-  if (digits.length === 12) {
-    return digits.slice(0, 11);
-  }
-
-  return digits.padStart(11, "0");
-}
-
-function withChecksum(upc11) {
-  return upc11 + calculateUPCChecksum(upc11);
-}
-
-function calculateUPCChecksum(upc11) {
-  let sumOdd = 0;
-  let sumEven = 0;
-
-  for (let i = 0; i < upc11.length; i++) {
-    const digit = parseInt(upc11[i], 10);
-    if (i % 2 === 0) sumOdd += digit;
-    else sumEven += digit;
-  }
-
-  const total = sumOdd * 3 + sumEven;
-  return (10 - (total % 10)) % 10;
 }
 
 function addToHistory(upc) {
