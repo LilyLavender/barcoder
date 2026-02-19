@@ -28,6 +28,17 @@ function generate(value) {
   }
 }
 
+function cleanShelfTag(value) {
+  let text = value.trim();
+
+  if (/^\d+$/.test(text) && text.length >= 14 && text.length <= 15) {
+    text = text.slice(2);
+    text = text.replace(/^0+/, "");
+  }
+
+  return text;
+}
+
 let activeStream = null;
 
 async function startCamera() {
@@ -39,7 +50,7 @@ async function startCamera() {
   try {
     const result = await codeReader.decodeOnceFromVideoDevice(null, video);
 
-    const text = result.text.trim();
+    const text = cleanShelfTag(result.text);
 
     if (!text.length) {
       alert("Scanned code is invalid");
@@ -49,7 +60,7 @@ async function startCamera() {
 
     upcInput.value = text;
     generate(text);
-    
+
     videoCard.hidden = true;
     stopCamera();
   } catch (err) {
