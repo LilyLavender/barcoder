@@ -108,3 +108,20 @@ button.longbtn {
 h3 {
   margin-top: 0;
 }
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.clear-input {
+  position: absolute;
+  margin-top: 0.1em;
+  right: 0.5em;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.6rem;
+  color: black;
+  display: none;
+}

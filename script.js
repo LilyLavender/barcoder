@@ -2,6 +2,7 @@ const barcodeEl = document.getElementById("barcode");
 const upcInput = document.getElementById("upcInput");
 const barcodeCard = document.getElementById("barcodeCard");
 const historyEl = document.getElementById("history");
+const clearBtn = document.getElementById("clearInput");
 
 let currentUPC = null;
 
@@ -120,5 +121,16 @@ function removeFromHistory(upc) {
   localStorage.setItem("history", JSON.stringify(history));
   loadHistory();
 }
+
+upcInput.addEventListener("input", () => {
+  clearBtn.style.display = upcInput.value.length ? "block" : "none";
+});
+
+clearBtn.addEventListener("click", () => {
+  upcInput.value = "";
+  clearBtn.style.display = "none";
+  barcodeCard.classList.add("hidden");
+  upcInput.focus();
+});
 
 loadHistory();

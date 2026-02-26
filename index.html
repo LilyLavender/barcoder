@@ -3,19 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UPC Barcode Generator</title>
+  <title>Barcode Generator</title>
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 <body>
   <header class="header">
-    <h1>UPC Generator</h1>
+    <h1>Barcode Generator</h1>
     <button class="camera-btn" onclick="startCamera()"><i class="bi bi-camera"></i></button>
   </header>
 
   <div class="card">
-    <input id="upcInput" placeholder="Enter UPC" />
-    <button onclick="generate()" class="longbtn">Generate Barcode</button>
+    <div class="input-wrapper">
+      <input id="upcInput" placeholder="Enter Barcode" />
+      <i class="bi bi-x clear-input" id="clearInput"></i>
+    </div>
+    <button onclick="generate()" class="longbtn">Create Barcode</button>
   </div>
 
   <div class="card" id="video-card" hidden>
